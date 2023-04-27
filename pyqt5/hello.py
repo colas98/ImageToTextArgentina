@@ -12,18 +12,32 @@ class MainWindow(qtw.QWidget):
         self.setLayout(qtw.QVBoxLayout())
 
         # Create a Label
-        my_label = qtw.QLabel("Hello World! What's your name?")
-
+        my_label = qtw.QLabel("Pick Something From The List Below")
+        # Change the font size of label
+        my_label.setFont(qtg.QFont('Helvetica', 24))
         self.layout().addWidget(my_label)
 
-        # Change the font size of label
-        my_label.setFont(qtg.QFont('Helvetica', 18))
 
         # Create an entry box
-        my_entry = qtw.QLineEdit()
-        my_entry.setObjectName("name_field")
-        my_entry.setText("")
-        self.layout().addWidget(my_entry)
+        # my_entry = qtw.QLineEdit()
+        # my_entry.setObjectName("name_field")
+        # my_entry.setText("")
+        # self.layout().addWidget(my_entry)
+
+        # Create a Combo box
+        my_combo = qtw.QComboBox(self,
+                                 editable=True,
+                                 insertPolicy=qtw.QComboBox.InsertAtBottom)
+
+        # Add Items to the Combo Box
+        my_combo.addItem("Pepperoni", "Something")
+        my_combo.addItem("Cheese", qtw.QWidget)
+        my_combo.addItem("Peppers", 2)
+        my_combo.addItems(["One" "Two", "Three"])
+        my_combo.insertItem(2, "Third Thing")
+
+
+
 
         # Create a button
         my_button = qtw.QPushButton("Press me!",
@@ -35,9 +49,13 @@ class MainWindow(qtw.QWidget):
 
         def press_it():
             # Set entry box
-            my_label.setText(f'Hello {my_entry.text()}!')
+            # my_label.setText(f'Hello {my_entry.text()}!')
             # Clear entry box
-            my_entry.setText("")
+            # my_entry.setText("")
+            my_label.setText(f'You Picked {my_combo.currentText()}!')
+
+            # Put combobox on the screen
+            self.layout().addWidget(my_combo)
 
 
 app = qtw.QApplication([])
