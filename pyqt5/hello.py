@@ -47,6 +47,7 @@ class MainWindow(qtw.QWidget):
 
         self.show()
 
+        # import main
         def press_it():
             # Set entry box
             # my_label.setText(f'Hello {my_entry.text()}!')
@@ -54,6 +55,8 @@ class MainWindow(qtw.QWidget):
             # my_entry.setText("")
             my_label.setText(f'You Picked {my_combo.currentText()}!')
 
+            # book_path = 'C:/Users/Hp/OneDrive/Escritorio/libro_3.pdf'
+            # main.print_pages(my_combo.currentText())
             # Put combobox on the screen
             self.layout().addWidget(my_combo)
 

@@ -29,5 +29,5 @@ def print_pages(pdf_file):
         text = ocr_core(img)
         print('next')
 
-book_path = 'C:/Users/Hp/OneDrive/Escritorio/libro_3.pdf'
-print_pages(book_path)
+#book_path = 'C:/Users/Hp/OneDrive/Escritorio/libro_3.pdf'
+#print_pages(book_path)
