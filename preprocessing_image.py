@@ -61,12 +61,12 @@ def preprocess_image(img, dict_preprocessing):
     img = cv2.dilate(img, kernel, iterations=1)
     img = cv2.erode(img, kernel, iterations=1)
 
-    if dict_preprocessing['cropping_image'] is True:
-        # Crop the areas where provision number is more likely present
-        img = crop_image(img, dict_preprocessing['pnr_area'][0], dict_preprocessing['pnr_area'][1],
-                         dict_preprocessing['pnr_area'][2], dict_preprocessing['pnr_area'][3])
-        img_show = Image.fromarray(img, 'RGB')
-        display(img_show)
+    # if dict_preprocessing['cropping_image'] is True:
+        # # Crop the areas where provision number is more likely present
+        # img = crop_image(img, dict_preprocessing['pnr_area'][0], dict_preprocessing['pnr_area'][1],
+        #                  dict_preprocessing['pnr_area'][2], dict_preprocessing['pnr_area'][3])
+        # img_show = Image.fromarray(img, 'RGB')
+        # display(img_show)
 
     # Rescale the image, if needed.
     if dict_preprocessing['resizing_image'] is True:

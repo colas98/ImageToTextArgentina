@@ -81,7 +81,7 @@ for num, pdf in enumerate(pdf_list):
     with open('C:/Users/Hp/PycharmProjects/ImageToTextArgentina/data/' + pdf_dict[pdf]['sample'],  'r', encoding='utf-8') as f :
         reference_text = f.read()
     output_text = ''
-    pnr_area = [150, 450, 1600, 1150]
+    # pnr_area = [150, 450, 1600, 1150] #TODO: In progress
     dict_preprocessing = {}
     for pg, img in enumerate(images):
         img = preprocess_image(img, dict_preprocessing = pdf_dict[pdf])
