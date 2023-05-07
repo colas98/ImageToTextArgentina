@@ -7,8 +7,6 @@ try:
     from PIL import Image
 except ImportError:
     import Image
-from IPython.display import Image, display
-
 
 def resizing_image(img, argument):
     '''
@@ -53,31 +51,32 @@ def crop_image(img, start_x, start_y, end_x, end_y):
     return cropped
 
 
-def preprocess_image(img, dict_preprocessing):
+def preprocess_image(img, parameters):
     img = np.array(img)
 
+    # if parameters['cropping_image'] is True:
+        # # Crop the areas where provision number is more likely present
+        # img = crop_image(img, parameters['pnr_area'][0], parameters['pnr_area'][1],
+        #                  parameters['pnr_area'][2], parameters['pnr_area'][3])
+        # img_show = Image.fromarray(img, 'RGB')
+        # display(img_show)
+
+    # Convert to gray
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
     # Apply dilation and erosion to remove some noise
+
     kernel = np.ones((1, 1), np.uint8)
     img = cv2.dilate(img, kernel, iterations=1)
     img = cv2.erode(img, kernel, iterations=1)
 
-    # if dict_preprocessing['cropping_image'] is True:
-        # # Crop the areas where provision number is more likely present
-        # img = crop_image(img, dict_preprocessing['pnr_area'][0], dict_preprocessing['pnr_area'][1],
-        #                  dict_preprocessing['pnr_area'][2], dict_preprocessing['pnr_area'][3])
-        # img_show = Image.fromarray(img, 'RGB')
-        # display(img_show)
-
     # Rescale the image, if needed.
-    if dict_preprocessing['resizing_image'] is True:
-        img = resizing_image(img, dict_preprocessing['resizing_method'])
-        img_show = Image.fromarray(img, 'RGB')
-        display(img_show)
-
+    if parameters['resizing_image'] is True:
+        img = resizing_image(img, parameters['resizing_method'])
+        # Image.fromarray(img).show()
     # Apply blurring and thresholding
-    if dict_preprocessing['thresholding_image']  is True:
-        img = threshold_image(img, dict_preprocessing['thresholding_method'])
-        img_show = Image.fromarray(img, 'RGB')
-        display(img_show)
+    if parameters['thresholding_image'] is True:
+        img = threshold_image(img, parameters['thresholding_method'])
+        # Image.fromarray(img).show()
 
     return img
