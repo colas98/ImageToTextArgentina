@@ -103,4 +103,3 @@ for num, pdf in enumerate(pdf_list):
     df_output.loc[df_output['pdf_filename'] == pdf, 'wer'] = wer
 
 df_output
-
