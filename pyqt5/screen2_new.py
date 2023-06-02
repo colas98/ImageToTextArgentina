@@ -152,6 +152,10 @@ class Ui_Form(object):
         self.verticalLayout_6.addWidget(self.bookLabel)
         self.pushButton = QtWidgets.QPushButton(self.page_1)
         self.pushButton.setObjectName("pushButton")
+
+        self.pushButton.clicked.connect(self.getFileName2)
+
+
         self.verticalLayout_6.addWidget(self.pushButton)
         self.sampleLabel = QtWidgets.QLabel(self.page_1)
         self.sampleLabel.setMaximumSize(QtCore.QSize(16777215, 20))
@@ -315,13 +319,21 @@ class Ui_Form(object):
             self.animacion.start()
 
     def closescr(self, Form):
+        print(self.FirstPagespinBox.value())
         Form.hide()
 
     def getFileName(self):
         response = QFileDialog.getOpenFileName(
         )
         print(response)
-        self.label_2.setText(response[0])
+        self.bookLabel.setText(response[0])
+        return response[0]
+
+    def getFileName2(self):
+        response = QFileDialog.getOpenFileName(
+        )
+        print(response)
+        self.sampleLabel.setText(response[0])
         return response[0]
 
 
@@ -333,3 +345,4 @@ if __name__ == "__main__":
     ui.setupUi(Form)
     Form.show()
     sys.exit(app.exec_())
+
