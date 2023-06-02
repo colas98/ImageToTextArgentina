@@ -9,7 +9,10 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import os
+from PyQt5.QtWidgets import QFileDialog
 from PyQt5.QtCore import QPropertyAnimation
+
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -60,7 +63,7 @@ class Ui_Form(object):
         self.horizontalLayout.setSpacing(0)
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.frame_lateral = QtWidgets.QFrame(self.frame_inferior)
-        self.frame_lateral.setMinimumSize(QtCore.QSize(0, 0))
+        self.frame_lateral.setMinimumSize(QtCore.QSize(100, 0))
         self.frame_lateral.setMaximumSize(QtCore.QSize(0, 16777215))
         self.frame_lateral.setStyleSheet("QFrame{\n"
 "background: rgb(85, 170, 255)\n"
@@ -133,53 +136,61 @@ class Ui_Form(object):
         self.page_1.setObjectName("page_1")
         self.verticalLayout_6 = QtWidgets.QVBoxLayout(self.page_1)
         self.verticalLayout_6.setObjectName("verticalLayout_6")
-        self.path = QtWidgets.QPushButton(self.page_1)
-        self.path.setObjectName("path")
-        self.verticalLayout_6.addWidget(self.path)
+        self.generalInfo = QtWidgets.QPushButton(self.page_1)
+        self.generalInfo.setObjectName("generalInfo")
+
+        self.generalInfo.clicked.connect(self.getFileName)
+
+        self.verticalLayout_6.addWidget(self.generalInfo)
+        self.label_2 = QtWidgets.QLabel(self.page_1)
+        self.label_2.setObjectName("label_2")
+        self.verticalLayout_6.addWidget(self.label_2)
         self.stackedWidget.addWidget(self.page_1)
         self.page_2 = QtWidgets.QWidget()
         self.page_2.setObjectName("page_2")
         self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.page_2)
         self.verticalLayout_5.setObjectName("verticalLayout_5")
-        self.general = QtWidgets.QPushButton(self.page_2)
-        self.general.setObjectName("general")
-        self.verticalLayout_5.addWidget(self.general)
+        self.generalPa = QtWidgets.QPushButton(self.page_2)
+        self.generalPa.setObjectName("generalPa")
+        self.verticalLayout_5.addWidget(self.generalPa)
         self.stackedWidget.addWidget(self.page_2)
         self.page_3 = QtWidgets.QWidget()
         self.page_3.setObjectName("page_3")
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.page_3)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
-        self.advance = QtWidgets.QPushButton(self.page_3)
-        self.advance.setObjectName("advance")
-        self.verticalLayout_3.addWidget(self.advance)
+        self.advancedPa = QtWidgets.QPushButton(self.page_3)
+        self.advancedPa.setObjectName("advancedPa")
+        self.verticalLayout_3.addWidget(self.advancedPa)
         self.stackedWidget.addWidget(self.page_3)
         self.horizontalLayout_3.addWidget(self.stackedWidget)
         self.horizontalLayout.addWidget(self.frame)
         self.verticalLayout.addWidget(self.frame_inferior)
         self.exit = QtWidgets.QPushButton(Form)
         self.exit.setObjectName("exit")
-        self.exit.clicked.connect(lambda: self.closescr(Form))
         self.verticalLayout.addWidget(self.exit)
 
-
-        #
         self.bt_path.clicked.connect(lambda: self.stackedWidget.setCurrentWidget(self.page_1))
         self.bt_general.clicked.connect(lambda: self.stackedWidget.setCurrentWidget(self.page_2))
         self.bt_advanced.clicked.connect(lambda: self.stackedWidget.setCurrentWidget(self.page_3))
 
-        # self.ui.bt_dos.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_dos))
-        # self.ui.bt_tres.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_tres))
-        # self.ui.bt_cuatro.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_cuatro))
-        # self.ui.bt_cinco.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_cinco))
-
-
-        #
-
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
-    def closescr(self, Form):
-        Form.hide()
+    def retranslateUi(self, Form):
+        _translate = QtCore.QCoreApplication.translate
+        Form.setWindowTitle(_translate("Form", "Form"))
+        self.bt_menu.setText(_translate("Form", "MENU"))
+        self.bt_path.setText(_translate("Form", "Info"))
+        self.bt_general.setText(_translate("Form", "General Param"))
+        self.bt_advanced.setText(_translate("Form", "Advanced Param"))
+        self.label.setText(_translate("Form", "Python-Scan"))
+        self.pushButton_3.setText(_translate("Form", "PushButton"))
+        self.generalInfo.setText(_translate("Form", "generalInfo"))
+        self.label_2.setText(_translate("Form", "None"))
+        self.generalPa.setText(_translate("Form", "General"))
+        self.advancedPa.setText(_translate("Form", "Advanced Parameters"))
+        self.exit.setText(_translate("Form", "Exit"))
+        self.exit.clicked.connect(lambda: self.closescr(Form))
 
     def mover_menu(self):
         if True:
@@ -196,20 +207,15 @@ class Ui_Form(object):
             self.animacion.setEasingCurve(QtCore.QEasingCurve.InOutQuart)
             self.animacion.start()
 
-    def retranslateUi(self, Form):
-        _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
-        self.bt_menu.setText(_translate("Form", "MENU"))
-        self.bt_path.setText(_translate("Form", "Path"))
-        self.bt_general.setText(_translate("Form", "General"))
-        self.bt_advanced.setText(_translate("Form", "Advanced"))
-        self.label.setText(_translate("Form", "Python-Scan"))
-        self.pushButton_3.setText(_translate("Form", "PushButton"))
-        self.path.setText(_translate("Form", "Path"))
-        self.general.setText(_translate("Form", "General"))
-        self.advance.setText(_translate("Form", "Advanced"))
-        self.exit.setText(_translate("Form", "Exit"))
+    def closescr(self, Form):
+        Form.hide()
 
+    def getFileName(self):
+        response = QFileDialog.getOpenFileName(
+        )
+        print(response)
+        self.label_2.setText(response[0])
+        return response[0]
 
 
 if __name__ == "__main__":

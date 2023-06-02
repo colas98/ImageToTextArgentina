@@ -1,0 +1,19 @@
+{
+  "generalInfo": {
+    "general_data_path": "C:/Users/Hp/PycharmProjects/ImageToTextArgentina/data",
+    "pdf_name": "libro_1.pdf",
+    "txt_name": "libro_1_sample.txt"
+
+  },
+  "generalParameters": {
+    "first_page": 20,
+    "last_page": 21,
+    "sampling": false,
+    "thresholding_image": true,
+    "resizing_image": true
+  },
+  "advancedParameters": {
+    "thresholding_method": "ALL",
+    "resizing_method": "ALL"
+  }
+}
