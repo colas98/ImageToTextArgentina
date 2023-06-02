@@ -9,6 +9,9 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import os
+from PyQt5.QtWidgets import QFileDialog
+from PyQt5.QtCore import QPropertyAnimation
 
 
 class Ui_Form(object):
@@ -42,6 +45,8 @@ class Ui_Form(object):
         icon.addPixmap(QtGui.QPixmap("images/icons/icons/menu.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.bt_menu.setIcon(icon)
         self.bt_menu.setObjectName("bt_menu")
+        self.bt_menu.clicked.connect(self.mover_menu)
+
         self.horizontalLayout_4.addWidget(self.bt_menu)
         spacerItem = QtWidgets.QSpacerItem(225, 17, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_4.addItem(spacerItem)
@@ -135,6 +140,9 @@ class Ui_Form(object):
         self.verticalLayout_6.setObjectName("verticalLayout_6")
         self.generalInfo = QtWidgets.QPushButton(self.page_1)
         self.generalInfo.setObjectName("generalInfo")
+
+        self.generalInfo.clicked.connect(self.getFileName)
+
         self.verticalLayout_6.addWidget(self.generalInfo)
         self.bookLabel = QtWidgets.QLabel(self.page_1)
         self.bookLabel.setMaximumSize(QtCore.QSize(16777215, 20))
@@ -230,6 +238,7 @@ class Ui_Form(object):
         self.ResizingMethodComboBox.addItem("")
         self.ResizingMethodComboBox.addItem("")
         self.verticalLayout_3.addWidget(self.ResizingMethodComboBox)
+
         self.stackedWidget.addWidget(self.page_3)
         self.horizontalLayout_3.addWidget(self.stackedWidget)
         self.horizontalLayout.addWidget(self.frame)
@@ -237,6 +246,10 @@ class Ui_Form(object):
         self.exit = QtWidgets.QPushButton(Form)
         self.exit.setObjectName("exit")
         self.verticalLayout.addWidget(self.exit)
+
+        self.bt_path.clicked.connect(lambda: self.stackedWidget.setCurrentWidget(self.page_1))
+        self.bt_general.clicked.connect(lambda: self.stackedWidget.setCurrentWidget(self.page_2))
+        self.bt_advanced.clicked.connect(lambda: self.stackedWidget.setCurrentWidget(self.page_3))
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -284,6 +297,32 @@ class Ui_Form(object):
         self.ResizingMethodComboBox.setItemText(3, _translate("Form", "2"))
         self.ResizingMethodComboBox.setItemText(4, _translate("Form", "3"))
         self.exit.setText(_translate("Form", "Exit"))
+        self.exit.clicked.connect(lambda: self.closescr(Form))
+
+    def mover_menu(self):
+        if True:
+            width = self.frame_lateral.width()
+            normal = 0
+            if width == 0:
+                extender = 200
+            else:
+                extender = normal
+            self.animacion = QPropertyAnimation(self.frame_lateral, b'minimumWidth')
+            self.animacion.setDuration(300)
+            self.animacion.setStartValue(width)
+            self.animacion.setEndValue(extender)
+            self.animacion.setEasingCurve(QtCore.QEasingCurve.InOutQuart)
+            self.animacion.start()
+
+    def closescr(self, Form):
+        Form.hide()
+
+    def getFileName(self):
+        response = QFileDialog.getOpenFileName(
+        )
+        print(response)
+        self.label_2.setText(response[0])
+        return response[0]
 
 
 if __name__ == "__main__":
