@@ -45,3 +45,5 @@ def secondscr(self):
     self.Form.show()
 
 self.secondbtn.clicked.connect(self.secondscr)
+
+MainWindow.resize(320, 140)
