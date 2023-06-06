@@ -9,14 +9,12 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import os
-from PyQt5.QtWidgets import QFileDialog
-from PyQt5.QtCore import QPropertyAnimation
+
 
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(627, 383)
+        Form.resize(627, 405)
         self.verticalLayout = QtWidgets.QVBoxLayout(Form)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setSpacing(0)
@@ -44,8 +42,6 @@ class Ui_Form(object):
         icon.addPixmap(QtGui.QPixmap("images/icons/icons/menu.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.MenuButton.setIcon(icon)
         self.MenuButton.setObjectName("MenuButton")
-        self.MenuButton.clicked.connect(self.mover_menu)
-
         self.horizontalLayout_4.addWidget(self.MenuButton)
         spacerItem = QtWidgets.QSpacerItem(225, 17, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_4.addItem(spacerItem)
@@ -157,7 +153,6 @@ class Ui_Form(object):
         self.verticalLayout_6.addItem(spacerItem2)
         self.BookFileButton = QtWidgets.QPushButton(self.PathsPage)
         self.BookFileButton.setObjectName("BookFileButton")
-        self.BookFileButton.clicked.connect(self.getFileName)
         self.verticalLayout_6.addWidget(self.BookFileButton)
         self.BookLabel = QtWidgets.QLabel(self.PathsPage)
         self.BookLabel.setMaximumSize(QtCore.QSize(16777215, 20))
@@ -169,8 +164,6 @@ class Ui_Form(object):
         self.verticalLayout_6.addItem(spacerItem3)
         self.SampleFileButton = QtWidgets.QPushButton(self.PathsPage)
         self.SampleFileButton.setObjectName("SampleFileButton")
-        self.SampleFileButton.clicked.connect(self.getFileName2)
-
         self.verticalLayout_6.addWidget(self.SampleFileButton)
         self.SampleFileLabel = QtWidgets.QLabel(self.PathsPage)
         self.SampleFileLabel.setMaximumSize(QtCore.QSize(16777215, 20))
@@ -312,11 +305,6 @@ class Ui_Form(object):
         self.ExitButton.setObjectName("ExitButton")
         self.verticalLayout.addWidget(self.ExitButton)
 
-        self.PathButton.clicked.connect(lambda: self.stackedWidget.setCurrentWidget(self.PathsPage))
-        self.GeneralButton.clicked.connect(lambda: self.stackedWidget.setCurrentWidget(self.GeneralParametersPage))
-        self.AdvancedButton.clicked.connect(lambda: self.stackedWidget.setCurrentWidget(self.AdvancedParametersPage))
-
-
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
@@ -365,37 +353,7 @@ class Ui_Form(object):
         self.ResizingMethodComboBox.setItemText(4, _translate("Form", "3"))
         self.RunButton.setText(_translate("Form", "Run"))
         self.ExitButton.setText(_translate("Form", "Exit"))
-        self.ExitButton.clicked.connect(lambda: self.closescr(Form))
 
-    def mover_menu(self):
-        if True:
-            width = self.LateralFrame.width()
-            normal = 0
-            if width == 0:
-                extender = 200
-            else:
-                extender = normal
-            self.animacion = QPropertyAnimation(self.LateralFrame, b'minimumWidth')
-            self.animacion.setDuration(300)
-            self.animacion.setStartValue(width)
-            self.animacion.setEndValue(extender)
-            self.animacion.setEasingCurve(QtCore.QEasingCurve.InOutQuart)
-            self.animacion.start()
-
-    def closescr(self, Form):
-        Form.hide()
-
-    def getFileName(self):
-        response = QFileDialog.getOpenFileName(
-        )
-        self.BookLabel.setText(response[0])
-        return response[0]
-
-    def getFileName2(self):
-        response = QFileDialog.getOpenFileName(
-        )
-        self.SampleFileLabel.setText(response[0])
-        return response[0]
 
 if __name__ == "__main__":
     import sys

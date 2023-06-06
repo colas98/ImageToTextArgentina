@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>627</width>
-    <height>383</height>
+    <height>405</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -30,7 +30,7 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="QFrame" name="frame_superior">
+    <widget class="QFrame" name="SuperiorFrame">
      <property name="minimumSize">
       <size>
        <width>0</width>
@@ -54,7 +54,7 @@
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_4">
       <item>
-       <widget class="QPushButton" name="bt_menu">
+       <widget class="QPushButton" name="MenuButton">
         <property name="minimumSize">
          <size>
           <width>140</width>
@@ -72,7 +72,7 @@ border:0px;
 }</string>
         </property>
         <property name="text">
-         <string>MENU</string>
+         <string>  MENU</string>
         </property>
         <property name="icon">
          <iconset>
@@ -100,7 +100,7 @@ border:0px;
     </widget>
    </item>
    <item>
-    <widget class="QFrame" name="frame_inferior">
+    <widget class="QFrame" name="BottomFrame">
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
      </property>
@@ -124,7 +124,7 @@ border:0px;
        <number>0</number>
       </property>
       <item>
-       <widget class="QFrame" name="frame_lateral">
+       <widget class="QFrame" name="LateralFrame">
         <property name="minimumSize">
          <size>
           <width>0</width>
@@ -162,7 +162,7 @@ border-bottom-left-radius: 20px;
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_2">
          <item>
-          <widget class="QPushButton" name="bt_path">
+          <widget class="QPushButton" name="PathButton">
            <property name="minimumSize">
             <size>
              <width>0</width>
@@ -175,12 +175,12 @@ background-color:white;
 }</string>
            </property>
            <property name="text">
-            <string>Info</string>
+            <string>Paths</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="bt_general">
+          <widget class="QPushButton" name="GeneralButton">
            <property name="minimumSize">
             <size>
              <width>0</width>
@@ -199,7 +199,7 @@ background-color:white;
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="bt_advanced">
+          <widget class="QPushButton" name="AdvancedButton">
            <property name="minimumSize">
             <size>
              <width>0</width>
@@ -230,7 +230,12 @@ background-color:white;
           </spacer>
          </item>
          <item>
-          <widget class="QLabel" name="label">
+          <widget class="QLabel" name="PythonScanLabel">
+           <property name="font">
+            <font>
+             <italic>true</italic>
+            </font>
+           </property>
            <property name="text">
             <string>Python-Scan</string>
            </property>
@@ -243,7 +248,7 @@ background-color:white;
        </widget>
       </item>
       <item>
-       <widget class="QFrame" name="frame">
+       <widget class="QFrame" name="MainFrame">
         <property name="frameShape">
          <enum>QFrame::StyledPanel</enum>
         </property>
@@ -268,30 +273,67 @@ background-color:white;
          </property>
          <item>
           <widget class="QStackedWidget" name="stackedWidget">
-           <widget class="QWidget" name="page">
+           <widget class="QWidget" name="WelcomePage">
             <layout class="QVBoxLayout" name="verticalLayout_4">
              <item>
-              <widget class="QPushButton" name="pushButton_3">
+              <widget class="QLabel" name="WelcomeLabel">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Ignored" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="text">
-                <string>PushButton</string>
+                <string>Welcome to SCAN module, click MENU to set the options </string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
                </property>
               </widget>
              </item>
             </layout>
            </widget>
-           <widget class="QWidget" name="page_1">
+           <widget class="QWidget" name="PathsPage">
             <layout class="QVBoxLayout" name="verticalLayout_7">
              <item>
               <layout class="QVBoxLayout" name="verticalLayout_6">
                <item>
-                <widget class="QPushButton" name="generalInfo">
+                <widget class="QLabel" name="PathsLabel">
+                 <property name="font">
+                  <font>
+                   <italic>true</italic>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>PATHS</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="verticalSpacer_11">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QPushButton" name="BookFileButton">
                  <property name="text">
                   <string>Book file (.pdf)</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QLabel" name="bookLabel">
+                <widget class="QLabel" name="BookLabel">
                  <property name="maximumSize">
                   <size>
                    <width>16777215</width>
@@ -310,14 +352,27 @@ background-color:white;
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="pushButton">
+                <spacer name="verticalSpacer_9">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QPushButton" name="SampleFileButton">
                  <property name="text">
                   <string>Sample File (.txt)</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QLabel" name="sampleLabel">
+                <widget class="QLabel" name="SampleFileLabel">
                  <property name="maximumSize">
                   <size>
                    <width>16777215</width>
@@ -337,14 +392,48 @@ background-color:white;
                </item>
               </layout>
              </item>
+             <item>
+              <spacer name="verticalSpacer_10">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
             </layout>
            </widget>
-           <widget class="QWidget" name="page_2">
+           <widget class="QWidget" name="GeneralParametersPage">
             <layout class="QVBoxLayout" name="verticalLayout_5">
              <item>
-              <widget class="QPushButton" name="generalPa">
+              <spacer name="verticalSpacer_13">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QLabel" name="GeneralParametersLabel">
+               <property name="font">
+                <font>
+                 <italic>true</italic>
+                </font>
+               </property>
                <property name="text">
-                <string>General</string>
+                <string>GENERAL PARAMETERS</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
                </property>
               </widget>
              </item>
@@ -356,7 +445,20 @@ background-color:white;
               </widget>
              </item>
              <item>
-              <widget class="QSpinBox" name="FirstPagespinBox"/>
+              <widget class="QSpinBox" name="FirstPageSpinBox"/>
+             </item>
+             <item>
+              <spacer name="verticalSpacer_2">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
              </item>
              <item>
               <widget class="QLabel" name="LastPageLabel">
@@ -367,6 +469,19 @@ background-color:white;
              </item>
              <item>
               <widget class="QSpinBox" name="SecondPageSpinBox"/>
+             </item>
+             <item>
+              <spacer name="verticalSpacer_4">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
              </item>
              <item>
               <widget class="QLabel" name="SamplingPageLabel">
@@ -390,6 +505,19 @@ background-color:white;
               </widget>
              </item>
              <item>
+              <spacer name="verticalSpacer_6">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
               <widget class="QLabel" name="ThresholdingImageLabel">
                <property name="text">
                 <string>Thresholding Image</string>
@@ -397,7 +525,7 @@ background-color:white;
               </widget>
              </item>
              <item>
-              <widget class="QComboBox" name="ThresholdingImagecomboBox">
+              <widget class="QComboBox" name="ThresholdingImageComboBox">
                <item>
                 <property name="text">
                  <string>True</string>
@@ -409,6 +537,19 @@ background-color:white;
                 </property>
                </item>
               </widget>
+             </item>
+             <item>
+              <spacer name="verticalSpacer_7">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
              </item>
              <item>
               <widget class="QLabel" name="ResizingImageLabel">
@@ -431,21 +572,58 @@ background-color:white;
                </item>
               </widget>
              </item>
+             <item>
+              <spacer name="verticalSpacer_8">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
             </layout>
            </widget>
-           <widget class="QWidget" name="page_3">
+           <widget class="QWidget" name="AdvancedParametersPage">
             <layout class="QVBoxLayout" name="verticalLayout_3">
              <item>
-              <widget class="QPushButton" name="advancedPa">
+              <widget class="QLabel" name="AdvancedParametersLabel">
+               <property name="font">
+                <font>
+                 <italic>true</italic>
+                </font>
+               </property>
                <property name="text">
-                <string>Advanced Parameters</string>
+                <string>ADVANCED PARAMETERS</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
                </property>
               </widget>
+             </item>
+             <item>
+              <spacer name="verticalSpacer_12">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
              </item>
              <item>
               <widget class="QLabel" name="ThresoldinMethodLabel">
                <property name="text">
                 <string>Thresholding Method</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
                </property>
               </widget>
              </item>
@@ -499,9 +677,25 @@ background-color:white;
               </widget>
              </item>
              <item>
+              <spacer name="verticalSpacer_3">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
               <widget class="QLabel" name="ResizingMethodLabel">
                <property name="text">
                 <string>Resizing Method</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
                </property>
               </widget>
              </item>
@@ -534,6 +728,19 @@ background-color:white;
                </item>
               </widget>
              </item>
+             <item>
+              <spacer name="verticalSpacer_5">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
             </layout>
            </widget>
           </widget>
@@ -545,9 +752,36 @@ background-color:white;
     </widget>
    </item>
    <item>
-    <widget class="QPushButton" name="exit">
+    <widget class="QPushButton" name="RunButton">
+     <property name="styleSheet">
+      <string notr="true">QPushButton:hover{
+background-color: white;
+font: 87 8pt &quot;Arial Black&quot;
+}</string>
+     </property>
+     <property name="text">
+      <string>Run</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>images/icons/icons/118620_play_icon.png</normaloff>images/icons/icons/118620_play_icon.png</iconset>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="ExitButton">
+     <property name="styleSheet">
+      <string notr="true">QPushButton:hover{
+background-color: white;
+font: 87 8pt &quot;Arial Black&quot;
+}</string>
+     </property>
      <property name="text">
       <string>Exit</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>images/icons/icons/icons8-exit-50.png</normaloff>images/icons/icons/icons8-exit-50.png</iconset>
      </property>
     </widget>
    </item>
