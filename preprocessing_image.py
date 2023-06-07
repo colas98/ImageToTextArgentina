@@ -71,12 +71,18 @@ def preprocess_image(img, parameters):
     img = cv2.erode(img, kernel, iterations=1)
 
     # Rescale the image, if needed.
-    if parameters['resizing_image'] is True:
-        img = resizing_image(img, parameters['resizing_method'])
+    if parameters['GeneralParameters']['ResizingImage'] is True:
+    # if parameters['resizing_image'] is True:
+        img = resizing_image(img, parameters['AdvancedParameters']['ResizingMethod'])
+        # img = resizing_image(img, parameters['resizing_method'])
+
         # Image.fromarray(img).show()
     # Apply blurring and thresholding
-    if parameters['thresholding_image'] is True:
-        img = threshold_image(img, parameters['thresholding_method'])
+    if parameters['GeneralParameters']['ThresholdingImage']  is True:
+        img = threshold_image(img, parameters['AdvancedParameters']['ThresholdingMethod'])
+    # if parameters['thresholding_image']  is True:
+    #     img = threshold_image(img, parameters['thresholding_method'])
+
         # Image.fromarray(img).show()
 
     return img

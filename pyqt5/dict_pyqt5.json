@@ -1,7 +1,7 @@
 {
-  "GeneralInfo": {
-    "BookFile": "libro_1.pdf",
-    "SampleFile": "libro_1_sample.txt"
+  "Paths": {
+    "BookFile": "C:/Users/Hp/PycharmProjects/ImageToTextArgentina/data/libro_1.pdf",
+    "SampleFile": "C:/Users/Hp/PycharmProjects/ImageToTextArgentina/data/libro_1_sample.txt"
 
   },
   "GeneralParameters": {
@@ -12,7 +12,7 @@
     "ResizingImage": true
   },
   "AdvancedParameters": {
-    "ThresholdingMethod": "All",
-    "ResizingMethod": "All"
+    "ThresholdingMethod": 2,
+    "ResizingMethod": 3
   }
 }

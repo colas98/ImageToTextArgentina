@@ -68,7 +68,7 @@ def str2bool(v):
 parameters = {'sample': 'libro_1_sample.txt', 'pdf': 'libro_1.pdf', 'first_page': 20, 'last_page': 21, 'sampling': False,
               'cropping_image': False, 'thresholding_image': True,
               'resizing_image': True,
-              'resizing_method': 1, 'thresholding_method': 1}
+              'resizing_method': 1, 'thresholding_method': 2}
 
 # parameters = {'sample': sample, 'pdf': pdf, 'first_page': first_page, 'last_page': last_page, 'sampling': sampling,
 #               'cropping_image': cropping_image, 'thresholding_image': thresholding_image,
