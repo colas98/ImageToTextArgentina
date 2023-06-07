@@ -300,6 +300,7 @@ class Ui_Form(object):
         icon1.addPixmap(QtGui.QPixmap("images/icons/icons/118620_play_icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.RunButton.setIcon(icon1)
         self.RunButton.setObjectName("RunButton")
+
         self.verticalLayout.addWidget(self.RunButton)
         self.ExitButton = QtWidgets.QPushButton(Form)
         self.ExitButton.setStyleSheet("QPushButton:hover{\n"
@@ -366,7 +367,12 @@ class Ui_Form(object):
         self.RunButton.setText(_translate("Form", "Run"))
         self.ExitButton.setText(_translate("Form", "Exit"))
         self.ExitButton.clicked.connect(lambda: self.closescr(Form))
+        self.RunButton.clicked.connect(lambda: self.execmain(Form))
 
+
+    def execmain(self):
+
+        pass
     def mover_menu(self):
         if True:
             width = self.LateralFrame.width()
