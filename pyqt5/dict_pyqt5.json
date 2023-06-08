@@ -12,7 +12,7 @@
     "ResizingImage": true
   },
   "AdvancedParameters": {
-    "ThresholdingMethod": 2,
+    "ThresholdingMethod": "All",
     "ResizingMethod": 3
   }
 }
