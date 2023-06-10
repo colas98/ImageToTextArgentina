@@ -55,8 +55,6 @@ class Scan:
         return v.lower() in ("yes", "true", "t", "1")
 
     def run(self):
-        self.df_output = self.df_output.assign(pdf_filename=[self.dict_parameters['Paths']['BookFile']])
-
         images = self.pdf_to_img(self.dict_parameters['Paths']['BookFile'],
                                  self.dict_parameters['GeneralParameters']['FirstPage'],
                                  self.dict_parameters['GeneralParameters']['LastPage'])
@@ -72,24 +70,18 @@ class Scan:
 
         cer = fastwer.score_sent(output_text, reference_text, char_level=True)
         wer = fastwer.score_sent(output_text, reference_text, char_level=False)
-        self.df_output.loc[
-            self.df_output['pdf_filename'] == self.dict_parameters['Paths']['BookFile'], 'sample_filename'] = \
-            self.dict_parameters['Paths']['SampleFile']
-        self.df_output.loc[self.df_output['pdf_filename'] == self.dict_parameters['Paths'][
-            'BookFile'], 'txt_reference'] = reference_text[0:200]
-        self.df_output.loc[
-            self.df_output['pdf_filename'] == self.dict_parameters['Paths']['BookFile'], 'ocr_output'] = output_text[
-                                                                                                         0:200]
-        self.df_output.loc[self.df_output['pdf_filename'] == self.dict_parameters['Paths']['BookFile'], 'cer'] = cer
-        self.df_output.loc[self.df_output['pdf_filename'] == self.dict_parameters['Paths']['BookFile'], 'wer'] = wer
-        self.df_output.loc[
-            self.df_output['pdf_filename'] == self.dict_parameters['Paths']['BookFile'], 'thresholding_method'] = \
-        self.dict_parameters['AdvancedParameters']['ThresholdingMethod']
-        self.df_output.loc[
-            self.df_output['pdf_filename'] == self.dict_parameters['Paths']['BookFile'], 'resizing_method'] = \
-        self.dict_parameters['AdvancedParameters']['ResizingMethod']
 
-        # print(self.df_output)
+        # OUTPUTS
+        self.df_output = self.df_output.assign(
+                                               pdf_filename=[self.dict_parameters['Paths']['BookFile']],
+                                               sample_filename=[self.dict_parameters['Paths']['SampleFile']],
+                                               txt_reference=[reference_text[0:200]],
+                                               ocr_output=[output_text[ 0:200]],
+                                               cer = [cer],
+                                               wer = [wer],
+                                               thresholding_method = [self.dict_parameters['AdvancedParameters']['ThresholdingMethod']],
+                                               resizing_method = [self.dict_parameters['AdvancedParameters']['ResizingMethod']]
+                                                )
         return self.df_output
 
 
