@@ -9,41 +9,20 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import pandas as pd
-from PyQt5.QtCore import QAbstractTableModel, Qt
-from PyQt5.QtWidgets import QApplication, QTableView
-import time
-from PyQt5.QtCore import QObject, QThread, pyqtSignal
-from time import sleep
-from PyQt5.QtWidgets import QLabel, QHeaderView
+
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(977, 671)
-
-        self.thread={}
-        self.n = 1
-        self.df = pd.DataFrame({'a': ['Mary', 'Jim', 'John'],
-                           'b': [100, 200, 300],
-                           'c': ['a', 'b', 'c'],
-                           'd': ['a', 'b', 'c'],
-                           'e': ['a', 'b', 'c']}
-                                )
-
-
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setGeometry(QtCore.QRect(790, 140, 91, 51))
         self.pushButton.setObjectName("pushButton")
-        self.pushButton.clicked.connect(self.runLongTask)
-
         self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_2.setGeometry(QtCore.QRect(790, 240, 91, 61))
         self.pushButton_2.setObjectName("pushButton_2")
-        self.pushButton_2.clicked.connect(self.refresh)
-
         self.tableView = QtWidgets.QTableView(self.centralwidget)
         self.tableView.setGeometry(QtCore.QRect(40, 60, 721, 461))
         self.tableView.setObjectName("tableView")
@@ -62,87 +41,14 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-    def reportProgress(self, n):
-        self.label.setText(f"Long-Running Step: {n}")
-        self.label.adjustSize()
-
-
-    class Worker(QObject):
-        finished = pyqtSignal()
-        progress = pyqtSignal(int)
-
-        def run(self):
-            """Long-running task."""
-            for i in range(5):
-                sleep(4)
-                self.progress.emit(i + 1)
-            self.finished.emit()
-    def runLongTask(self):
-        # Step 2: Create a QThread object
-        self.thread = QThread()
-        # Step 3: Create a worker object
-        self.worker = self.Worker()
-        # Step 4: Move worker to the thread
-        self.worker.moveToThread(self.thread)
-        # Step 5: Connect signals and slots
-        self.thread.started.connect(self.worker.run)
-        self.worker.finished.connect(self.thread.quit)
-        self.worker.finished.connect(self.worker.deleteLater)
-        self.thread.finished.connect(self.thread.deleteLater)
-        self.worker.progress.connect(self.reportProgress)
-        # Step 6: Start the thread
-        self.thread.start()
-
-        # Final resets
-        self.pushButton.setEnabled(False)
-        self.thread.finished.connect(
-            lambda: self.pushButton.setEnabled(True)
-        )
-        self.thread.finished.connect(
-            lambda: self.stepLabel.setText("Long-Running Step: 0")
-        )
-
-    class pandasModel(QAbstractTableModel):
-        def __init__(self, data):
-            QAbstractTableModel.__init__(self)
-            self._data = data
-
-        def rowCount(self, parent=None):
-            return self._data.shape[0]
-
-        def columnCount(self, parnet=None):
-            return self._data.shape[1]
-
-        def data(self, index, role=Qt.DisplayRole):
-            if index.isValid():
-                if role == Qt.DisplayRole:
-                    return str(self._data.iloc[index.row(), index.column()])
-            return None
-
-        def headerData(self, col, orientation, role):
-            if orientation == Qt.Horizontal and role == Qt.DisplayRole:
-                return self._data.columns[col]
-            return None
-
-    # def run(self):
-    #     sleep(4)
-
-    def refresh(self):
-        self.df.replace([self.df['b'][0]], self.df['b'][0] + self.n, inplace=True)
-        model = self.pandasModel(self.df)
-        self.tableView.setModel(model)
-        header = self.tableView.horizontalHeader()
-        for n in range(self.df.shape[1]):
-            header.setSectionResizeMode(n, QHeaderView.Stretch)
-        self.tableView.show()
-
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.pushButton.setText(_translate("MainWindow", "Run"))
         self.pushButton_2.setText(_translate("MainWindow", "Refresh"))
         self.label.setText(_translate("MainWindow", "Click Run Button"))
-        self.label.adjustSize()
+
+
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
