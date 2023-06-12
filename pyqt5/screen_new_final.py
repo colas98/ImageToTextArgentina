@@ -13,7 +13,9 @@ import pandas as pd
 from PyQt5.QtCore import QAbstractTableModel, Qt
 from PyQt5.QtWidgets import QApplication, QTableView
 import time
-
+from PyQt5.QtCore import QObject, QThread, pyqtSignal
+from time import sleep
+from PyQt5.QtWidgets import QLabel
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -27,10 +29,15 @@ class Ui_MainWindow(object):
                            'c': ['a', 'b', 'c']})
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
+
+
+        self.stepLabel = QLabel("Long-Running Step: 0")
+        self.stepLabel.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
+
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setGeometry(QtCore.QRect(320, 100, 75, 23))
         self.pushButton.setObjectName("pushButton")
-        self.pushButton.clicked.connect(self.run)
+        self.pushButton.clicked.connect(self.runLongTask)
         self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_2.setGeometry(QtCore.QRect(320, 170, 75, 23))
         self.pushButton_2.setObjectName("pushButton_2")
@@ -51,15 +58,50 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+    def reportProgress(self, n):
+        self.stepLabel.setText(f"Long-Running Step: {n}")
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.pushButton.setText(_translate("MainWindow", "Run"))
         self.pushButton_2.setText(_translate("MainWindow", "Refresh"))
 
+    class Worker(QObject):
+        finished = pyqtSignal()
+        progress = pyqtSignal(int)
+
+        def run(self):
+            """Long-running task."""
+            for i in range(5):
+                sleep(4)
+                self.progress.emit(i + 1)
+            self.finished.emit()
+    def runLongTask(self):
+        # Step 2: Create a QThread object
+        self.thread = QThread()
+        # Step 3: Create a worker object
+        self.worker = self.Worker()
+        # Step 4: Move worker to the thread
+        self.worker.moveToThread(self.thread)
+        # Step 5: Connect signals and slots
+        self.thread.started.connect(self.worker.run)
+        self.worker.finished.connect(self.thread.quit)
+        self.worker.finished.connect(self.worker.deleteLater)
+        self.thread.finished.connect(self.thread.deleteLater)
+        self.worker.progress.connect(self.reportProgress)
+        # Step 6: Start the thread
+        self.thread.start()
+
+        # Final resets
+        self.pushButton.setEnabled(False)
+        self.thread.finished.connect(
+            lambda: self.pushButton.setEnabled(True)
+        )
+        self.thread.finished.connect(
+            lambda: self.stepLabel.setText("Long-Running Step: 0")
+        )
 
     class pandasModel(QAbstractTableModel):
-
         def __init__(self, data):
             QAbstractTableModel.__init__(self)
             self._data = data
@@ -81,35 +123,10 @@ class Ui_MainWindow(object):
                 return self._data.columns[col]
             return None
 
-    class ThreadClass(QtCore.QThread):
-        any_signal = QtCore.pyqtSignal(int)
-
-        def __init__(self, parent=None, index=0):
-            self.index = index
-            self.is_running = True
-
-        def stop(self):
-            self.is_running = False
-            print('Stopping thread...', self.index)
-            self.terminate()
-
-    def run(self):
-        self.thread[2] = self.ThreadClass(parent = None, index=2)
-        self.thread[2].start()
-        self.thread[2].any_signal.connect(self.my_function)
-        self.thread[2].stop()
-
-    def my_function(self):
-        from time import sleep
-        sleep(8)
+    # def run(self):
+    #     sleep(4)
 
     def refresh(self):
-        self.thread[1] = self.ThreadClass(parent=None, index=1)
-        self.thread[1].start()
-        self.thread[1].any_signal.connect(self.my_function2)
-        self.thread[1].stop()
-
-    def my_function2(self):
         self.df.replace([self.df['b'][0]], self.df['b'][0] + self.n, inplace=True)
         model = self.pandasModel(self.df)
         self.tableView.setModel(model)
