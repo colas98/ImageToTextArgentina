@@ -20,7 +20,7 @@ from PyQt5.QtWidgets import QLabel, QHeaderView
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(411, 400)
+        MainWindow.resize(977, 671)
 
         self.thread={}
         self.n = 1
@@ -30,28 +30,29 @@ class Ui_MainWindow(object):
                            'd': ['a', 'b', 'c'],
                            'e': ['a', 'b', 'c']}
                                 )
+
+
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-
-
-        self.stepLabel = QLabel("Long-Running Step: 0")
-        self.stepLabel.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
-
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton.setGeometry(QtCore.QRect(320, 100, 75, 23))
+        self.pushButton.setGeometry(QtCore.QRect(790, 140, 91, 51))
         self.pushButton.setObjectName("pushButton")
         self.pushButton.clicked.connect(self.runLongTask)
+
         self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_2.setGeometry(QtCore.QRect(320, 170, 75, 23))
+        self.pushButton_2.setGeometry(QtCore.QRect(790, 240, 91, 61))
         self.pushButton_2.setObjectName("pushButton_2")
         self.pushButton_2.clicked.connect(self.refresh)
 
         self.tableView = QtWidgets.QTableView(self.centralwidget)
-        self.tableView.setGeometry(QtCore.QRect(40, 60, 256, 192))
+        self.tableView.setGeometry(QtCore.QRect(40, 60, 721, 461))
         self.tableView.setObjectName("tableView")
+        self.label = QtWidgets.QLabel(self.centralwidget)
+        self.label.setGeometry(QtCore.QRect(790, 380, 131, 91))
+        self.label.setObjectName("label")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 411, 22))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 977, 31))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
@@ -62,12 +63,9 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def reportProgress(self, n):
-        self.stepLabel.setText(f"Long-Running Step: {n}")
-    def retranslateUi(self, MainWindow):
-        _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.pushButton.setText(_translate("MainWindow", "Run"))
-        self.pushButton_2.setText(_translate("MainWindow", "Refresh"))
+        self.label.setText(f"Long-Running Step: {n}")
+        self.label.adjustSize()
+
 
     class Worker(QObject):
         finished = pyqtSignal()
@@ -138,8 +136,13 @@ class Ui_MainWindow(object):
             header.setSectionResizeMode(n, QHeaderView.Stretch)
         self.tableView.show()
 
-
-
+    def retranslateUi(self, MainWindow):
+        _translate = QtCore.QCoreApplication.translate
+        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.pushButton.setText(_translate("MainWindow", "Run"))
+        self.pushButton_2.setText(_translate("MainWindow", "Refresh"))
+        self.label.setText(_translate("MainWindow", "Click Run Button"))
+        self.label.adjustSize()
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
@@ -148,4 +151,3 @@ if __name__ == "__main__":
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
-
