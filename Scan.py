@@ -108,9 +108,9 @@ if __name__ == '__main__':
         for num in range(1, NUM_THRESHOLDING_METHOD_OPTIONS + 1):
             for num_2 in range(1, NUM_RESIZING_METHOD_OPTIONS + 1):
                 dict_parameters_list.append(copy.deepcopy(dict_parameters))
-                dict_parameters_list[num * NUM_THRESHOLDING_METHOD_OPTIONS + num_2 - 1]['AdvancedParameters'][
+                dict_parameters_list[(num-1) * NUM_RESIZING_METHOD_OPTIONS + num_2 - 1]['AdvancedParameters'][
                     'ThresholdingMethod'] = num
-                dict_parameters_list[num * NUM_RESIZING_METHOD_OPTIONS + num_2 - 1]['AdvancedParameters'][
+                dict_parameters_list[(num-1) * NUM_RESIZING_METHOD_OPTIONS + num_2 - 1]['AdvancedParameters'][
                     'ResizingMethod'] = num_2
     df_output_total =  pd.DataFrame(
             columns=['pdf_filename', 'sample_filename', 'txt_reference', 'ocr_output', 'cer', 'wer', 'resizing_method',

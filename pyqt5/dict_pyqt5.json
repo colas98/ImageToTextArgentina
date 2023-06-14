@@ -13,6 +13,6 @@
   },
   "AdvancedParameters": {
     "ThresholdingMethod": "All",
-    "ResizingMethod": 3
+    "ResizingMethod": "All"
   }
 }
