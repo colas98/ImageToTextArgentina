@@ -27,26 +27,16 @@ NUM_RESIZING_METHOD_OPTIONS = 3
 
 
 class Ui_Screen3(object):
+
+    def __init__(self, dict_parameters):
+        self.dict_parameters = dict_parameters
     def setupUi(self, MainWindow):
-
-
-        # self.dict_parameters = dict_parameters
-        self.dict_parameters = {'Paths': {'BookFile': 'C:/Users/Hp/PycharmProjects/ImageToTextArgentina/data/libro_1.pdf',
-                   'SampleFile': 'C:/Users/Hp/PycharmProjects/ImageToTextArgentina/data/libro_1_sample.txt'},
-         'GeneralParameters': {'FirstPage': 20, 'LastPage': 21, 'Sampling': 0, 'ThresholdingImage': True,
-                               'ResizingImage': True},
-         'AdvancedParameters': {'ThresholdingMethod': 'All', 'ResizingMethod': 'All'}}
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(977, 671)
 
         self.thread={}
         self.n = 1
-        self.df = pd.DataFrame({'a': ['Mary', 'Jim', 'John'],
-                           'b': [100, 200, 300],
-                           'c': ['a', 'b', 'c'],
-                           'd': ['a', 'b', 'c'],
-                           'e': ['a', 'b', 'c']}
-                                )
+        self.df = pd.DataFrame()
 
 
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -84,11 +74,11 @@ class Ui_Screen3(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-    def reportProgress(self, n):
+    def reportProgress(self, n, n_total):
         self.progressBar.setMinimum(0)
-        self.progressBar.setMaximum(len(range(5)))
+        self.progressBar.setMaximum(n_total)
         self.progressBar.setValue(n + 1)
-        self.label.setText(f"Long-Running Step: {n}")
+        self.label.setText(f"Long-Running Step: {n} out of {n_total}")
         self.label.adjustSize()
 
 
@@ -99,7 +89,7 @@ class Ui_Screen3(object):
             QObject.__init__(self)
             self.dict_parameters = dict_parameters
         finished = pyqtSignal()
-        progress = pyqtSignal(int)
+        progress = pyqtSignal(int, int)
 
         def run(self):
             # self.dict_parameters = {
@@ -135,13 +125,17 @@ class Ui_Screen3(object):
                         self.dict_parameters_list[(num - 1) * NUM_RESIZING_METHOD_OPTIONS + num_2 - 1]['AdvancedParameters'][
                             'ResizingMethod'] = num_2
 
+            else:
+                self.dict_parameters_list.append(copy.deepcopy(self.dict_parameters))
+
             df_output_total = pd.DataFrame(
                 columns=['pdf_filename', 'sample_filename', 'txt_reference', 'ocr_output', 'cer', 'wer', 'resizing_method',
                          'thresholding_method'])
             num = 0
             for self.dict_parameters in self.dict_parameters_list:
                 num += 1
-                self.progress.emit(num)
+                num_total = len(self.dict_parameters_list)
+                self.progress.emit(num, num_total)
                 print(self.dict_parameters)
                 ScanBook = Scan(self.dict_parameters)
                 df_output = ScanBook.run()

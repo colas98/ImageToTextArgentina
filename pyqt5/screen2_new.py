@@ -381,17 +381,25 @@ class Ui_Form(object):
         self.dict_parameters["Paths"]["BookFile"] = str(self.BookLabel.text())
         self.dict_parameters["Paths"]["SampleFile"] = str(self.SampleFileLabel.text())
         self.dict_parameters["GeneralParameters"]["FirstPage"] = int(self.FirstPageSpinBox.value())
-        self.dict_parameters["GeneralParameters"]["Sampling"] = int(self.FirstPageSpinBox.value())
+        self.dict_parameters["GeneralParameters"]["LastPage"] = int(self.FirstPageSpinBox.value())
+        self.dict_parameters["GeneralParameters"]["Sampling"] = self.str2bool(self.SamplingcomboBox.currentText())
         self.dict_parameters["GeneralParameters"]["ThresholdingImage"] = self.str2bool(self.ThresholdingImageComboBox.currentText())
         self.dict_parameters["GeneralParameters"]["ResizingImage"] = self.str2bool(self.ResizingImagecomboBox.currentText())
-        self.dict_parameters["AdvancedParameters"]["ThresholdingMethod"] = str(self.ThresholdingMethodComboBox.currentText())
-        self.dict_parameters["AdvancedParameters"]["ResizingMethod"] = str(self.ThresholdingMethodComboBox.currentText())
+        self.dict_parameters["AdvancedParameters"]["ThresholdingMethod"] = self.str2type(str(self.ThresholdingMethodComboBox.currentText()))
+        self.dict_parameters["AdvancedParameters"]["ResizingMethod"] = self.str2type(str(self.ResizingMethodComboBox.currentText()))
         self.MainWindow2 = QtWidgets.QMainWindow()
-        self.ui3scr= Ui_Screen3()
+        self.ui3scr= Ui_Screen3(self.dict_parameters)
         # self.ui3scr.setupUi(self.MainWindow2, self.dict_parameters)
         self.ui3scr.setupUi(self.MainWindow2)
         self.MainWindow2.show()
 
+    def str2type(self, v):
+        if v == 'None':
+            return None
+        if v == 'All':
+            return 'All'
+        else:
+            return int(v)
     def str2bool(self, v):
         return v.lower() in ("yes", "true", "t", "1")
 
