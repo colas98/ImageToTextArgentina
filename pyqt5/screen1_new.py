@@ -9,10 +9,10 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from screen2_new import Ui_Form
+from screen2_new import Ui_Screen2
 
 
-class Ui_MainWindow(object):
+class Ui_Screen1(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(310, 150)
@@ -30,26 +30,26 @@ class Ui_MainWindow(object):
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.widget)
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.secondbtn = QtWidgets.QPushButton(self.widget)
-        self.secondbtn.setStyleSheet("background: rgb(85, 170, 255)")
-        self.secondbtn.setText("")
+        self.ScanPushButton = QtWidgets.QPushButton(self.widget)
+        self.ScanPushButton.setStyleSheet("background: rgb(85, 170, 255)")
+        self.ScanPushButton.setText("")
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("images/icons/icons/qr-code-scan.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.secondbtn.setIcon(icon)
-        self.secondbtn.setIconSize(QtCore.QSize(100, 100))
-        self.secondbtn.setObjectName("secondbtn")
-        self.horizontalLayout.addWidget(self.secondbtn)
+        self.ScanPushButton.setIcon(icon)
+        self.ScanPushButton.setIconSize(QtCore.QSize(100, 100))
+        self.ScanPushButton.setObjectName("ScanPushButton")
+        self.horizontalLayout.addWidget(self.ScanPushButton)
         spacerItem = QtWidgets.QSpacerItem(13, 105, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
-        self.secondbtn_2 = QtWidgets.QPushButton(self.widget)
-        self.secondbtn_2.setStyleSheet("background: #55aaff")
-        self.secondbtn_2.setText("")
+        self.SummaryPushButton = QtWidgets.QPushButton(self.widget)
+        self.SummaryPushButton.setStyleSheet("background: #55aaff")
+        self.SummaryPushButton.setText("")
         icon1 = QtGui.QIcon()
         icon1.addPixmap(QtGui.QPixmap("images/icons/icons/summary_pyqt5.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.secondbtn_2.setIcon(icon1)
-        self.secondbtn_2.setIconSize(QtCore.QSize(100, 100))
-        self.secondbtn_2.setObjectName("secondbtn_2")
-        self.horizontalLayout.addWidget(self.secondbtn_2)
+        self.SummaryPushButton.setIcon(icon1)
+        self.SummaryPushButton.setIconSize(QtCore.QSize(100, 100))
+        self.SummaryPushButton.setObjectName("SummaryPushButton")
+        self.horizontalLayout.addWidget(self.SummaryPushButton)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 418, 22))
@@ -61,7 +61,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-        self.secondbtn.clicked.connect(self.secondscr)
+        self.ScanPushButton.clicked.connect(self.secondscr)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -70,7 +70,7 @@ class Ui_MainWindow(object):
     def secondscr(self):
         # Code the 2nd screen here
         self.Form = QtWidgets.QWidget()
-        self.ui = Ui_Form()
+        self.ui = Ui_Screen2()
         self.ui.setupUi(self.Form)
         self.Form.show()
 
@@ -78,7 +78,7 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
+    ui = Ui_Screen1()
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())

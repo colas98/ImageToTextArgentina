@@ -17,7 +17,7 @@ from PyQt5.QtCore import QPropertyAnimation
 from screen3_new_Scan import Ui_Screen3
 import json
 
-class Ui_Form(object):
+class Ui_Screen2(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(627, 383)
@@ -438,7 +438,7 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     Form = QtWidgets.QWidget()
-    ui = Ui_Form()
+    ui = Ui_Screen2()
     ui.setupUi(Form)
     Form.show()
     sys.exit(app.exec_())
