@@ -10,6 +10,7 @@ import matplotlib.pyplot as plt
 from preprocessing_image import preprocess_image
 import json
 import os
+import PyPDF2
 import copy
 
 # TESSERACT MAIN
@@ -83,6 +84,22 @@ class Scan:
                                                resizing_method = [self.dict_parameters['AdvancedParameters']['ResizingMethod']]
                                                 )
         return self.df_output
+
+    def run_end_2_end(self):
+        reader = PyPDF2.PdfReader(self.dict_parameters['Paths']['BookFile'])
+        totalPages = len(reader.pages)
+        output_text = ''
+        images = self.pdf_to_img(self.dict_parameters['Paths']['BookFile'],
+                                 0,
+                                 totalPages-515)
+        for pg, img in enumerate(images):
+            img = preprocess_image(img, parameters=self.dict_parameters)
+            output_aux_text = self.ocr_core(img)
+            output_text += output_aux_text
+
+        return output_text
+
+
 
 
 if __name__ == '__main__':

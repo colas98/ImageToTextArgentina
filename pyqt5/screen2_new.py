@@ -381,7 +381,7 @@ class Ui_Form(object):
         self.dict_parameters["Paths"]["BookFile"] = str(self.BookLabel.text())
         self.dict_parameters["Paths"]["SampleFile"] = str(self.SampleFileLabel.text())
         self.dict_parameters["GeneralParameters"]["FirstPage"] = int(self.FirstPageSpinBox.value())
-        self.dict_parameters["GeneralParameters"]["LastPage"] = int(self.FirstPageSpinBox.value())
+        self.dict_parameters["GeneralParameters"]["LastPage"] = int(self.SecondPageSpinBox.value())
         self.dict_parameters["GeneralParameters"]["Sampling"] = self.str2bool(self.SamplingcomboBox.currentText())
         self.dict_parameters["GeneralParameters"]["ThresholdingImage"] = self.str2bool(self.ThresholdingImageComboBox.currentText())
         self.dict_parameters["GeneralParameters"]["ResizingImage"] = self.str2bool(self.ResizingImagecomboBox.currentText())
