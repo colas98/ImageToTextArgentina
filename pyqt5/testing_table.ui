@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>977</width>
+    <width>979</width>
     <height>671</height>
    </rect>
   </property>
@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="RunSamplePushButton">
     <property name="geometry">
      <rect>
       <x>790</x>
@@ -24,10 +24,10 @@
      </rect>
     </property>
     <property name="text">
-     <string>Run</string>
+     <string>Run Sample Test</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="RefreshPushButton">
     <property name="geometry">
      <rect>
       <x>790</x>
@@ -40,7 +40,7 @@
      <string>Refresh</string>
     </property>
    </widget>
-   <widget class="QTableView" name="tableView">
+   <widget class="QTableView" name="OutputTableView">
     <property name="geometry">
      <rect>
       <x>40</x>
@@ -50,7 +50,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="RunSampleProgressLabel">
     <property name="geometry">
      <rect>
       <x>790</x>
@@ -63,7 +63,7 @@
      <string>Click Run Button</string>
     </property>
    </widget>
-   <widget class="QProgressBar" name="progressBar">
+   <widget class="QProgressBar" name="ProgressBar">
     <property name="geometry">
      <rect>
       <x>790</x>
@@ -76,14 +76,40 @@
      <number>24</number>
     </property>
    </widget>
+   <widget class="QPushButton" name="RunBookPushButton">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>560</y>
+      <width>721</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>RUN full BOOK</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="TimeScanLabel">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>590</y>
+      <width>721</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Time estimated of scanning full book: 0 sec</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>977</width>
-     <height>31</height>
+     <width>979</width>
+     <height>22</height>
     </rect>
    </property>
   </widget>
