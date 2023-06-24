@@ -1,19 +1,14 @@
 {
-  "generalInfo": {
-    "general_data_path": "C:/Users/Hp/PycharmProjects/ImageToTextArgentina/data",
-    "pdf_name": "libro_1.pdf",
-    "txt_name": "libro_1_sample.txt"
-
-  },
-  "generalParameters": {
-    "first_page": 20,
-    "last_page": 21,
-    "sampling": false,
-    "thresholding_image": true,
-    "resizing_image": true
-  },
-  "advancedParameters": {
-    "thresholding_method": "ALL",
-    "resizing_method": "ALL"
-  }
+"Paths": {
+  "BookFile": "C:/Users/Hp/PycharmProjects/ImageToTextArgentina/data/libro_1.pdf",
+  "SampleFile": "C:/Users/Hp/PycharmProjects/ImageToTextArgentina/data/libro_1_sample.txt"},
+"GeneralParameters": {
+  "FirstPage": 20,
+  "LastPage": 21,
+  "Sampling": 0,
+  "ThresholdingImage": true,
+  "ResizingImage": true},
+"AdvancedParameters": {
+  "ThresholdingMethod": "All",
+  "ResizingMethod": "All"}
 }

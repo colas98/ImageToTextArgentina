@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import os
 from PyQt5.QtWidgets import QFileDialog
 from PyQt5.QtCore import QPropertyAnimation
-from screen3_new_Scan import Ui_Screen3
+from screen3 import Ui_Screen3
 import json
 
 class Ui_Screen2(object):

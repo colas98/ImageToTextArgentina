@@ -9,7 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from screen2_new import Ui_Screen2
+from screen2 import Ui_Screen2
 
 
 class Ui_Screen1(object):
