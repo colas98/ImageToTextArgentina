@@ -97,7 +97,9 @@ class Ui_Screen3(object):
         self.RunSampleProgressLabel.adjustSize()
 
     def run_end_2_end(self):
-        self.df = pd.read_csv("C:/Users/Hp/PycharmProjects/ImageToTextArgentina/data/df_output.csv")
+        cwd = os.getcwd()
+        path = os.path.dirname(cwd)
+        self.df = pd.read_csv(path + "/data/df_output.csv")
         self.dict_parameters['AdvancedParameters']['ThresholdingMethod'] = self.df['thresholding_method'][0]
         self.dict_parameters['AdvancedParameters']['ResizingMethod'] = self.df['resizing_method'][0]
         ScanBook = Scan(self.dict_parameters)
@@ -237,7 +239,9 @@ class Ui_Screen3(object):
     def refresh(self):
         # self.df.replace([self.df['b'][0]], self.df['b'][0] + self.n, inplace=True)
         cwd = os.getcwd()
-        self.df = pd.read_csv("C:/Users/Hp/PycharmProjects/ImageToTextArgentina/data/df_output.csv")
+        path = os.path.dirname(cwd)
+        self.df = pd.read_csv(path + "/data/df_output.csv")
+        os.path.dirname(cwd)
         self.df.sort_values(['cer'], inplace = True)
         time_per_page = self.df['time_per_page'][0]
         self.df = self.df[['pdf_filename', 'cer', 'wer', 'thresholding_method', 'resizing_method']]
